@@ -671,7 +671,7 @@ sub _set_key {
     my $pem = $key->get_private_key_string;
     my ($n, $e) = $key->get_key_parameters;
     return $self->_status(INVALID_DATA, "Key modulus is divisible by a small prime and will be rejected.") if $self->_is_divisible($n);
-    $key->use_pkcs1_padding;
+    $key->use_pkcs1_oaep_padding;
     $key->use_sha256_hash;
     $self->{key_params} = { n => $n, e => $e };
     $self->{key} = $key;
